@@ -6,6 +6,7 @@ import {
 	FaMapMarkerAlt,
 	FaCertificate,
 } from "react-icons/fa";
+import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import resumePdf from "./assets/resume/RESUME.pdf";
 import me from "./assets/me/jordie.jpg";
@@ -42,46 +43,64 @@ function Home() {
 			<div className="min-h-screen flex items-center justify-center px-4 sm:px-6">
 				<style>{`
 				.typing-cursor {
-					animation: blink 0.7s infinite;
+					animation: blink 1s ease-in-out infinite;
 				}
 				@keyframes blink {
-					0%, 49% {
+					0%, 40% {
 						opacity: 1;
 					}
-					50%, 100% {
+					50%, 90% {
 						opacity: 0;
+					}
+					100% {
+						opacity: 1;
 					}
 				}
 			`}</style>
 				<div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
 					{/* TOP IMAGE FOR MOBILE */}
 					<div className="md:hidden flex justify-center order-first -mt-24 sm:-mt-20 mb-8 sm:mb-12">
-						<div className="relative rounded-full overflow-hidden w-64 h-64 sm:w-72 sm:h-72 border-4 border-gray-300 dark:border-gray-600 shadow-2xl hover:shadow-3xl dark:shadow-gray-900/50 dark:hover:shadow-gray-800/60 transition-shadow duration-500 group">
-							<img
+						<motion.div
+							className="relative rounded-full overflow-hidden w-64 h-64 sm:w-72 sm:h-72 border-4 border-gray-300 dark:border-gray-600 shadow-2xl dark:shadow-gray-900/50"
+							whileHover={{
+								scale: 1.02,
+								boxShadow: "0 25px 50px -15px rgba(59,130,246,0.35)",
+							}}
+							transition={{ duration: 0.6, ease: "easeOut" }}
+						>
+							<motion.img
 								src={me}
 								alt="Profile"
-								className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+								className="w-full h-full object-cover"
+								whileHover={{ scale: 1.08 }}
+								transition={{ duration: 0.8, ease: "easeOut" }}
 							/>
 
 							{/* Overlay Shine Effect */}
-							<div className="absolute inset-0 bg-gradient-to-br from-white/20 dark:from-gray-200/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+							<div className="absolute inset-0 bg-gradient-to-br from-white/20 dark:from-gray-200/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-out"></div>
 							{/* Subtle Inner Glow */}
 							<div className="absolute inset-0 rounded-full shadow-inner shadow-blue-500/20 dark:shadow-blue-400/30"></div>
-						</div>
+						</motion.div>
 					</div>
 
 					{/* LEFT CONTENT */}
 					<div>
 						<div className="flex items-center gap-3 mb-4 flex-wrap">
 							{/* Name */}
-							<span className="px-4 py-1 text-xl sm:text-2xl font-bold rounded-full bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-gray-200">
+							<motion.span
+								className="px-4 py-1 text-xl sm:text-2xl font-bold rounded-full bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-gray-200 cursor-default"
+								whileHover={{ scale: 1.05, y: -2 }}
+								transition={{ type: "spring", stiffness: 300, damping: 20 }}
+							>
 								Mark Jordan Javier
-							</span>
+							</motion.span>
 
 							{/* Certified Badge with polish */}
-							<div
-								className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/40 hover:scale-110 transition transform relative"
+							<motion.div
+								className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/40 relative cursor-pointer"
 								title="Certified Developer"
+								whileHover={{ scale: 1.2, rotate: 10 }}
+								transition={{ type: "spring", stiffness: 400, damping: 15 }}
 							>
 								<svg
 									fill="#009dff"
@@ -97,7 +116,7 @@ function Home() {
 
 								{/* Optional Glow Pulse */}
 								<span className="absolute inset-0 rounded-full bg-blue-300 dark:bg-blue-500 opacity-30 dark:opacity-20 animate-ping"></span>
-							</div>
+							</motion.div>
 						</div>
 
 						<div className="flex items-center gap-2 text-gray-600 dark:text-gray-300 mb-3 text-base sm:text-lg">
@@ -116,27 +135,27 @@ function Home() {
 
 						{/* Resume Download Button */}
 						<div className="fade-up-element mt-6 sm:mt-8">
-							<a
+							<motion.a
 								href={resumePdf}
 								download="Mark_Jordan_Javier_RESUME.pdf"
 								className="
-							group relative inline-block
-							font-semibold py-2 sm:py-3 px-4 sm:px-6 rounded-full
-							text-gray-600 dark:text-gray-200 text-sm sm:text-base
-							bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800
-							shadow-lg dark:shadow-gray-900/50 overflow-hidden
-							transition-all duration-300 ease-out
-							hover:-translate-y-1 hover:shadow-xl dark:hover:shadow-gray-800/60
-							active:scale-95 
-                        "
+								group relative inline-block
+								font-semibold py-2 sm:py-3 px-4 sm:px-6 rounded-full
+								text-gray-600 dark:text-gray-200 text-sm sm:text-base
+								bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800
+								shadow-lg dark:shadow-gray-900/50 overflow-hidden
+							"
+								whileHover={{ y: -4, scale: 1.02 }}
+								whileTap={{ scale: 0.98 }}
+								transition={{ type: "spring", stiffness: 400, damping: 20 }}
 							>
 								{/* Glow overlay */}
 								<span
 									className="
                             absolute inset-0 rounded-full 
-                            bg-gradient-to-tr from-gray-400/30 dark:from-gray-500/20 to-transparent 
+                            bg-gradient-to-tr from-blue-400/20 dark:from-blue-500/15 to-transparent 
                             opacity-0 group-hover:opacity-100 
-                            transition duration-500
+                            transition-opacity duration-500 ease-out
                         "
 								></span>
 
@@ -145,59 +164,76 @@ function Home() {
 									<span className="text-base sm:text-lg">📄</span>
 									<span>Download Resume</span>
 								</span>
-							</a>
+							</motion.a>
 						</div>
 
 						{/* SOCIAL ICONS */}
 						<div className="mt-6 flex items-center gap-5 text-2xl sm:text-3xl">
-							<a
+							<motion.a
 								href="https://www.facebook.com/markjordan.javier"
 								target="_blank"
-								className="hover:text-blue-600 dark:hover:text-blue-400 text-gray-700 dark:text-gray-200 transition duration-300 transform hover:scale-110"
+								className="text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400"
+								whileHover={{ scale: 1.2, y: -3 }}
+								transition={{ type: "spring", stiffness: 400, damping: 15 }}
 							>
 								<FaFacebook />
-							</a>
+							</motion.a>
 
-							<a
+							<motion.a
 								href="https://github.com/Jordieeeee"
 								target="_blank"
-								className="hover:text-gray-900 dark:hover:text-white text-gray-700 dark:text-gray-200 transition duration-300 transform hover:scale-110"
+								className="text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white"
+								whileHover={{ scale: 1.2, y: -3 }}
+								transition={{ type: "spring", stiffness: 400, damping: 15 }}
 							>
 								<FaGithub />
-							</a>
+							</motion.a>
 
-							<a
+							<motion.a
 								href="https://www.linkedin.com/in/mark-jordan-javier-29b72935a/"
 								target="_blank"
-								className="hover:text-blue-500 dark:hover:text-blue-400 text-gray-700 dark:text-gray-200 transition duration-300 transform hover:scale-110"
+								className="text-gray-700 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400"
+								whileHover={{ scale: 1.2, y: -3 }}
+								transition={{ type: "spring", stiffness: 400, damping: 15 }}
 							>
 								<FaLinkedin />
-							</a>
+							</motion.a>
 
-							<a
+							<motion.a
 								href="mailto:javiermarkjordan@email.com"
-								className="hover:text-red-500 dark:hover:text-red-400 text-gray-700 dark:text-gray-200 transition duration-300 transform hover:scale-110"
+								className="text-gray-700 dark:text-gray-200 hover:text-red-500 dark:hover:text-red-400"
+								whileHover={{ scale: 1.2, y: -3 }}
+								transition={{ type: "spring", stiffness: 400, damping: 15 }}
 							>
 								<FaEnvelope />
-							</a>
+							</motion.a>
 						</div>
 					</div>
 
 					{/* RIGHT IMAGE FOR DESKTOP */}
 					<div className="hidden md:flex justify-center">
-						<div className="relative rounded-full overflow-hidden w-80 h-80 border-4 border-gray-300 dark:border-gray-600 shadow-2xl hover:shadow-3xl dark:shadow-gray-900/50 dark:hover:shadow-gray-800/60 transition-shadow duration-500 group">
-							<img
+						<motion.div
+							className="relative rounded-full overflow-hidden w-80 h-80 border-4 border-gray-300 dark:border-gray-600 shadow-2xl dark:shadow-gray-900/50"
+							whileHover={{
+								scale: 1.03,
+								boxShadow: "0 25px 50px -15px rgba(59,130,246,0.4)",
+							}}
+							transition={{ duration: 0.6, ease: "easeOut" }}
+						>
+							<motion.img
 								src={me}
 								alt="Profile"
-								className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+								className="w-full h-full object-cover"
+								whileHover={{ scale: 1.1 }}
+								transition={{ duration: 0.8, ease: "easeOut" }}
 							/>
 
 							{/* Overlay Shine Effect */}
-							<div className="absolute inset-0 bg-gradient-to-br from-white/20 dark:from-gray-200/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+							<div className="absolute inset-0 bg-gradient-to-br from-white/20 dark:from-gray-200/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-out"></div>
 
 							{/* Subtle Inner Glow */}
 							<div className="absolute inset-0 rounded-full shadow-inner shadow-blue-500/20 dark:shadow-blue-400/30"></div>
-						</div>
+						</motion.div>
 					</div>
 				</div>
 			</div>
